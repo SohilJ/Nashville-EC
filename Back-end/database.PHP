@@ -17,60 +17,173 @@ if(!$con){
 //  die("Connection failed: " . $conn->connect_error);
 //}
 
+//creating database
+CREATE DATABSE nashville;
+USE nashville;
+
 //sql to create table
-$sql = "CREATE TABLE Organizations (
-id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+$sql = "CREATE TABLE users (
+user_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 name VARCHAR(30) NOT NULL,
-just_an_idea INT(1),
-pre_revenue INT(1),
-revenue_less_than_25k INT(1),
-revenue_between_25k_and_100k just INT(1),
-revenue_more_than_250k INT(1),
-arts INT(1),
-consumer_goods_retail INT(1),
-financial_services INT(1),
-food_and_beverages INT(1),
-healthcare INT(1),
-music_and_entertainment INT(1),
-technology INT(1),
-non_profit INT(1),
-service INT(1),
-product INT(1),
-technology_bussiness INT(1),
-brick_and_mortar INT(1),
-social_enterprise INT(1),
-small_bussiness INT(1),
-mentorship INT(1),
-startup_cirriculm INT(1),
-accelerator_incubrator_programs INT(1),
-networking_opportunities INT(1),
-educational_workshops INT(1),
-entrepreneurial_events INT(1),
-funding INT(1),
-coworking_spaces INT(1),
-american_indian_or_alaska_native INT(1),
-asian INT(1),
-black_or_african_american INT(1),
-hispanic_or_latino INT(1),
-native_hawaii_or_pacific_islander INT(1),
-middle_eastern INT(1),
-multiracial INT(1),
-other INT(1),
-rather_not_say INT(1),
-white INT(1),
-male INT(1),
-female INT(1),
-non_binary INT(1),
-other_gender INT(1),
-rather_not_say_gender INT(1),
-reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+email VARCHAR(30) NOT NULL,
+contact VARCHAR(30) NOT NULL,
+website VARCHAR(54) NOT NULL,
+logo BLOB,
+phone INT,
+description VARCHAR(500),
+program_overview VARCHAR(500)
 )";
 
 if ($conn->query($sql) === TRUE) {
-  echo "Table Organizations created successfully";
+  echo "Table users created successfully";
 } else {
-  echo "Error creating table: " . $conn->error;
+  echo "Error creating table users: " . $conn->error;
 }
+
+
+$sql2 = "CREATE TABLE demographics (
+d_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+demographic VARCHAR(30) NOT NULL
+)";
+
+if ($conn->query($sql2) === TRUE) {
+  echo "Table demographics created successfully";
+} else {
+  echo "Error creating table demographics: " . $conn->error;
+}
+
+
+$sql3 = "CREATE TABLE business_type (
+b_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+business VARCHAR(30) NOT NULL
+)";
+
+if ($conn->query($sql3) === TRUE) {
+  echo "Table business_type created successfully";
+} else {
+  echo "Error creating table business_type: " . $conn->error;
+}
+
+
+$sql4 = "CREATE TABLE genders (
+g_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+gender VARCHAR(30) NOT NULL
+)";
+
+if ($conn->query($sql4) === TRUE) {
+  echo "Table genders created successfully";
+} else {
+  echo "Error creating table genders: " . $conn->error;
+}
+
+
+$sql5 = "CREATE TABLE industries (
+i_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+industry VARCHAR(30) NOT NULL
+)";
+
+if ($conn->query($sql5) === TRUE) {
+  echo "Table industries created successfully";
+} else {
+  echo "Error creating table industries: " . $conn->error;
+}
+
+
+$sql6 = "CREATE TABLE stages (
+s_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+stage VARCHAR(30) NOT NULL
+)";
+
+if ($conn->query($sql6) === TRUE) {
+  echo "Table stages created successfully";
+} else {
+  echo "Error creating table stages: " . $conn->error;
+}
+
+
+$sql7 = "CREATE TABLE nagvigations (
+n_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+navigation VARCHAR(30) NOT NULL
+)";
+
+if ($conn->query($sql7) === TRUE) {
+  echo "Table navigations created successfully";
+} else {
+  echo "Error creating table navigations: " . $conn->error;
+}
+
+
+$sql8 = "CREATE TABLE users_demographics (
+user_id INT NOT NULL REFRENCES users(user_id),
+d_id INT NOT NULL REFRENCES demographics(d_id)
+)";
+
+if ($conn->query($sql8) === TRUE) {
+  echo "Table users_demographics created successfully";
+} else {
+  echo "Error creating table users_demographics: " . $conn->error;
+}
+
+
+$sql9 = "CREATE TABLE users_business_type (
+user_id INT NOT NULL REFRENCES users(user_id),
+b_id INT NOT NULL REFRENCES business_type(b_id)
+)";
+
+if ($conn->query($sql9) === TRUE) {
+  echo "Table users_business_type created successfully";
+} else {
+  echo "Error creating table users_business_type: " . $conn->error;
+}
+
+
+$sql10 = "CREATE TABLE users_gneders (
+user_id INT NOT NULL REFRENCES users(user_id),
+g_id INT NOT NULL REFRENCES genders(g_id)
+)";
+
+if ($conn->query($sql10) === TRUE) {
+  echo "Table users_gneders created successfully";
+} else {
+  echo "Error creating table users_gneders: " . $conn->error;
+}
+
+
+$sql11 = "CREATE TABLE users_industries (
+user_id INT NOT NULL REFRENCES users(user_id),
+i_id INT NOT NULL REFRENCES industries(i_id)
+)";
+
+if ($conn->query($sql11) === TRUE) {
+  echo "Table users_industries created successfully";
+} else {
+  echo "Error creating table users_industries: " . $conn->error;
+}
+
+
+$sql12 = "CREATE TABLE users_stages (
+user_id INT NOT NULL REFRENCES users(user_id),
+s_id INT NOT NULL REFRENCES stages(s_id)
+)";
+
+if ($conn->query($sql12) === TRUE) {
+  echo "Table users_stages created successfully";
+} else {
+  echo "Error creating table users_stages: " . $conn->error;
+}
+
+
+$sql13 = "CREATE TABLE users_navigations (
+user_id INT NOT NULL REFRENCES users(user_id),
+n_id INT NOT NULL REFRENCES navigations(n_id)
+)";
+
+if ($conn->query($sql13) === TRUE) {
+  echo "Table users_navigations created successfully";
+} else {
+  echo "Error creating table users_navigations: " . $conn->error;
+}
+
 
 //queries
 $sql = "SELECT name FROM Organizations WHERE arts=='1'";
