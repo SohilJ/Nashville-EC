@@ -7,12 +7,12 @@ $dbname = "myDB";
 mysql_connect($servername, $username, $password, $dbname);
 mysql_select_db($dbname) or die("Unable too connect database");
 
-// Create connection
+// Creating connection
 //$conn = new mysqli($servername, $username, $password, $dbname);
 if(!$con){
 	echo '<h1> connected to sql </h1>'
 }
-// Check connection
+// Checking connection
 //if ($conn->connect_error) {
 //  die("Connection failed: " . $conn->connect_error);
 //}
@@ -26,12 +26,8 @@ $sql = "CREATE TABLE users (
 user_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 name VARCHAR(30) NOT NULL,
 email VARCHAR(30) NOT NULL,
-contact VARCHAR(30) NOT NULL,
 website VARCHAR(54) NOT NULL,
-logo BLOB,
-phone INT,
-description VARCHAR(500),
-program_overview VARCHAR(500)
+description VARCHAR
 )";
 
 if ($conn->query($sql) === TRUE) {
@@ -184,137 +180,434 @@ if ($conn->query($sql13) === TRUE) {
   echo "Error creating table users_navigations: " . $conn->error;
 }
 
+//populating the users table with data- I populated 11/22 users for now.
 
-//queries
-$sql = "SELECT name FROM Organizations WHERE arts=='1'";
-$result -> $mysqli -> query($sql);
-while( $row = mysql_fetch_assoc( $result)){
-    $arts[] = $row;
+$records = "INSERT INTO users (name, email, website, description)
+VALUES ('Citizens kitchen', 'alan@citizenkitchens.com', 'https://citizenkitchens.com/', 'Citizen Kitchens is a food business incubator that provides access to all of the utilities and resources food entrepreneurs need to grow their businesses. For a monthly cost, you can get access to commercial kitchen space, storage, waste management, and certifications. Their shared cost absorption model helps entrepreneurs grow a food-based business in Nashville while managing the high price tags associated with equipment and licensing.');";
+
+$records .= "INSERT INTO users (name, email, website, description)
+VALUES ('Conexión Américas', 'ryan@conexionamericas.org', 'https://www.conexionamericas.org/','At Conexión Américas, our mission is to build a welcoming community and create opportunities where Latino families can belong, contribute and succeed.');";
+
+$records .= "INSERT INTO users (name, email, website, description)
+VALUES ('Bunker Labs', 'sue.black@bunkerlabs.org', 'https://bunkerlabs.org/', 'Bunker Labs is a national network of veteran entrepreneurs dedicated to helping new veteran entrepreneurs start their own business.')";
+
+$records .= "INSERT INTO users (name, email, website, description)
+VALUES ('EO', 'sameera@eonashville.com', 'https://www.eonetwork.org/', 'EO enables entrepreneurs to learn and grow from each other, leading to greater business success and an enriched personal life. We educate, we transform, we inspire and we offer invaluable resources in the form of local, regional and global events, leadership-development programs, confidential forums and executive education opportunities, among other offerings designed for personal and professional growth.')";
+
+$records .= "INSERT INTO users (name, email, website, description)
+VALUES ('H.O.M.E.', 'reed@helpingmusic.org', 'https://www.helpingmusic.org/', 'HOME's mission is to provide a supportive community for artist development and music production. They connect people in the entertainment and music industry through the use of their co-working space, studio space, and events.')";
+
+//This record did not have an email so there's a default one setup temorarily
+$records .= "INSERT INTO users (name, email, website, description)
+VALUES ('Launch Tennessee', 'default@gmail.com', 'https://launchtn.org/', 'Launch Tennessee is a public-private partnership that supports entrepreneurs from ideation to exit. We’re guided by a vision of making Tennessee the most startup-friendly state in the nation.')";
+
+$records .= "INSERT INTO users (name, email, website, description)
+VALUES ('Nashville Technology Council', 'erin.whitaker@technologycouncil.com', 'https://technologycouncil.com/', 'NTC exists to be a catalyst for the growth and influence of Middle Tennessee’s technology industry. By connecting, uniting, developing, and promoting our community, we propel the Nashville area forward to become a national leader in technology-based innovation and development.')";
+
+$records .= "INSERT INTO users (name, email, website, description)
+VALUES ('Center for Nonprofit Management', 'chelsea@cnm.com', 'https://www.cnm.org/', 'Our mission at CNM is amplifying the impact of nonprofits and their partners, in order to achieve a connected community equipped to realize our greatest opportunities. At CNM, your mission is our mission. Our job is to help you strengthen your organization and meet your goals.')";
+
+$records .= "INSERT INTO users (name, email, website, description)
+VALUES ('Pathway Lending', 'leslie.hayes@pathwaylending.org', 'https://www.pathwaylending.org/', 'Provides lending solutions and educational services that supports the development, growth, and preservation of underserved small businesses, affordable housing, and sustainable communities. We are financing businesses and strengthening communities.')";
+
+$records .= "INSERT INTO users (name, email, website, description)
+VALUES ('Arts & Business Council', 'jharwelldye@abcnashville', 'https://abcnashville.org/', 'The Arts & Business Council is a 501(c)(3) organization that leverages and unites the unique resources of the arts and business communities to create a thriving, sustainable creative culture in Nashville.We create mutually beneficial partnerships between arts and business along with direct services, key opportunities, and education to the creative community to help them master the business of art.')";
+
+//this record did not have both email and website and are therefore set to defaut
+$records .= "INSERT INTO users (name, email, website, description)
+VALUES ('CET Life Sciences Center', 'default@gmail.com', 'https://default.org/', 'The CET Life Sciences Center is a business incubator facility that offers laboratory and office space, equipment and infrastructure to early-stage biomedical companies. We help life sciences entrepreneurs start and grow businesses to turn promising ideas into commercial reality.')";
+
+
+//check for the above queries
+if ($conn->multi_query($records) === TRUE) {
+  echo "User records created successfully";
+} else {
+  echo "Error: " . $records . "<br>" . $conn->error;
 }
 
-$sql2 = "SELECT name FROM Organizations WHERE consumer_good_retail=='1'";
-$result2 -> $mysqli -> query($sql2);
-while( $row2 = mysql_fetch_assoc( $result2)){
-    $consumer_goods_retail[] = $row2;
+//populating the demographic table
+$table = "INSERT INTO demographics (demographic)
+VALUES ('American Indian or Alaskan Native');";
+
+$table .= "INSERT INTO demographics (demographic)
+VALUES ('Asian');";
+
+$table .= "INSERT INTO demographics (demographic)
+VALUES ('Black or African American');";
+
+$table .= "INSERT INTO demographics (demographic)
+VALUES ('Hispanic or Latino');";
+
+$table .= "INSERT INTO demographics (demographic)
+VALUES ('Middle Eastern');";
+
+$table .= "INSERT INTO demographics (demographic)
+VALUES ('Multi-Racial');";
+
+$table .= "INSERT INTO demographics (demographic)
+VALUES ('Native Hawaiian or Pacific Islander');";
+
+$table .= "INSERT INTO demographics (demographic)
+VALUES ('White');";
+
+$table .= "INSERT INTO demographics (demographic)
+VALUES ('other');";
+
+$table .= "INSERT INTO demographics (demographic)
+VALUES ('Rather not say');";
+
+//check for the above queries
+if ($conn->multi_query($table) === TRUE) {
+  echo "Demographics table populated successfully";
+} else {
+  echo "Error: " . $table . "<br>" . $conn->error;
 }
 
-$sql3 = "SELECT name FROM Organizations WHERE finanical_services=='1'";
-$result3 -> $mysqli -> query($sql3);
-while( $row3 = mysql_fetch_assoc( $result3)){
-    $financial_services[] = $row3;
+//populating the navigations table
+$tables = "INSERT INTO navigations (navigation)
+VALUES ('Mentorship');";
+
+$tables .= "INSERT INTO navigations (navigation)
+VALUES ('Co-working spaces');";
+
+$tables .= "INSERT INTO navigations (navigation)
+VALUES ('Startup cirriculum');";
+
+$tables .= "INSERT INTO navigations (navigation)
+VALUES ('Educational workshops');";
+
+$tables .= "INSERT INTO navigations (navigation)
+VALUES ('Network opportunities');";
+
+$tables .= "INSERT INTO navigations (navigation)
+VALUES ('Funding');";
+
+$tables .= "INSERT INTO navigations (navigation)
+VALUES ('Accelerator/ Incubator programs');";
+
+$tables .= "INSERT INTO navigations (navigation)
+VALUES ('Entrepreneurial events');";
+
+//check for the above queries
+if ($conn->multi_query($tables) === TRUE) {
+  echo "Navigations table populated successfully";
+} else {
+  echo "Error: " . $tables . "<br>" . $conn->error;
 }
 
-$sql4 = "SELECT name FROM Organizations WHERE food_and_beverages=='1'";
-$result4 -> $mysqli -> query($sql4);
-while( $row4 = mysql_fetch_assoc( $result4)){
-    $food_and_beverages[] = $row4;
-}
 
-$sql5 = "SELECT name FROM Organizations WHERE healthcare=='1'";
-$result5 -> $mysqli -> query($sql5);
-while( $row5 = mysql_fetch_assoc( $result5)){
-    $healthcare[] = $row5;
-}
+//populating the relation between user_id and d_id table
+$relation = "INSERT INTO users_demographics(user_id, n_id)
+VALUES ('1','1');";
 
-$sql6 = "SELECT name FROM Organizations WHERE music_and_entertainment=='1'";
-$result6 -> $mysqli -> query($sql6);
-while( $row6 = mysql_fetch_assoc( $result6)){
-    $music_and_entertainment[] = $row6;
-}
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('1','2');";
 
-$sql7 = "SELECT name FROM Organizations WHERE technology=='1'";
-$result7 -> $mysqli -> query($sql7);
-while( $row7 = mysql_fetch_assoc( $result7)){
-    $technology[] = $row7;
-}
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('1','3');";
 
-$sql8 = "SELECT name FROM Organizations WHERE non_profit=='1'";
-$result8 -> $mysqli -> query($sql8);
-while( $row8 = mysql_fetch_assoc( $result8)){
-    $non-profit[] = $row8;
-}
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('1','4');";
 
-$sql9 = "SELECT name FROM Organizations WHERE service=='1'";
-$result9 -> $mysqli -> query($sql9);
-while( $row9 = mysql_fetch_assoc( $result9)){
-    $service[] = $row9;
-}
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('1','5');";
 
-$sql10 = "SELECT name FROM Organizations WHERE product=='1'";
-$result10 -> $mysqli -> query($sql10);
-while( $row10 = mysql_fetch_assoc( $result10)){
-    $product[] = $row10;
-}
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('1','6');";
 
-$sql11 = "SELECT name FROM Organizations WHERE technology_bussiness=='1'";
-$result11 -> $mysqli -> query($sql11);
-while( $row11 = mysql_fetch_assoc( $result11)){
-    $technology_bussiness = $row11;
-}
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('1','7');";
 
-$sql12 = "SELECT name FROM Organizations WHERE brick_and_mortar=='1'";
-$result12 -> $mysqli -> query($sql12);
-while( $row12 = mysql_fetch_assoc( $result12)){
-    $brick_and_mortar[] = $row12;
-}
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('1','8');";
 
-$sql13 = "SELECT name FROM Organizations WHERE social_enterprise=='1'";
-$result13 -> $mysqli -> query($sql13);
-while( $row13 = mysql_fetch_assoc( $result13)){
-	$social_enterprise[] = $row13;
-}
-$sql14 = "SELECT name FROM Organizations WHERE small_bussiness=='1'";
-$result14 -> $mysqli -> query($sql14);
-while( $row14 = mysql_fetch_assoc( $result14)){
-    $small_bussiness[] = $row14;
-}
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('1','9');";
 
-$sql15 = "SELECT name FROM Organizations WHERE mentorship=='1'";
-$result15 -> $mysqli -> query($sql15);
-while( $row15 = mysql_fetch_assoc( $result15)){
-    $mentorship[] = $row15;
-}
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('1','10');";
 
-$sql16 = "SELECT name FROM Organizations WHERE startup_curriculm=='1'";
-$result16 -> $mysqli -> query($sql16);
-while( $row16 = mysql_fetch_assoc( $result16)){
-    $startup_curriculm[] = $row16;
-}
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('2','4');";
 
-$sql17 = "SELECT name FROM Organizations WHERE aacelerator_incubator_programs=='1'";
-$result17 -> $mysqli -> query($sql17);
-while( $row17 = mysql_fetch_assoc( $result17)){
-    $accelerator_incubator_programs[] = $row17;
-}
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('2','9');";
 
-$sql18 = "SELECT name FROM Organizations WHERE networking_opportunities=='1'";
-$result18 -> $mysqli -> query($sql18);
-while( $row18 = mysql_fetch_assoc( $result18)){
-    networking_opportunities[] = $row18;
-}
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('3','1');";
 
-$sql19 = "SELECT name FROM Organizations WHERE educational_workshops=='1'";
-$result19 -> $mysqli -> query($sql19);
-while( $row19 = mysql_fetch_assoc( $result19)){
-    $networking_opportunites[] = $row19;
-}
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('3','2');";
 
-$sql20 = "SELECT name FROM Organizations WHERE entrepreneurial_events=='1'";
-$result20 -> $mysqli -> query($sql20);
-while( $row20 = mysql_fetch_assoc( $result20)){
-    $entrepreneurial_events[] = $row20;
-}
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('3','3');";
 
-$sql21 = "SELECT name FROM Organizations WHERE funding=='1'";
-$result121 -> $mysqli -> query($sql21);
-while( $row21 = mysql_fetch_assoc( $result21)){
-    $funding[] = $row21;
-}
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('3','4');";
 
-$sql22 = "SELECT name FROM Organizations WHERE coworking_spaces=='1'";
-$result22 -> $mysqli -> query($sql22);
-while( $row22= mysql_fetch_assoc( $result22)){
-    $coworking_spaces[] = $row22;
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('3','5');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('3','6');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('3','7');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('3','8');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('3','9');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('3','10');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('4','1');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('4','2');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('4','3');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('4','4');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('4','5');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('4','6');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('4','7');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('4','8');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('4','9');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('4','10');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('5','1');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('5','2');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('5','3');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('5','4');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('5','5');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('5','6');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('5','7');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('5','8');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('5','9');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('5','10');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('6','1');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('6','2');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('6','3');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('6','4');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('6','5');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('6','6');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('6','7');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('6','8');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('6','9');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('6','10');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('7','1');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('7','2');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('7','3');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('7','4');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('7','5');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('7','6');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('7','7');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('7','8');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('7','9');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('7','10');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('8','1');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('8','2');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('8','3');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('8','4');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('8','5');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('8','6');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('8','7');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('8','8');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('8','9');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('8','10');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('9','1');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('9','2');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('9','3');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('9','4');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('9','5');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('9','6');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('9','7');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('9','8');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('9','9');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('9','10');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('10','1');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('10','2');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('10','3');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('10','4');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('10','5');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('10','6');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('10','7');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('10','8');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('10','9');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('10','10');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('11','1');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('11','2');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('11','3');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('11','4');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('11','5');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('11','6');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('11','7');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('11','8');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('11','9');";
+
+$relation .= "INSERT INTO  users_demographics(user_id, n_id)
+VALUES ('11','10');";
+
+//check for the above queries
+if ($conn->multi_query($relation) === TRUE) {
+  echo "user_demographics relation table populated successfully";
+} else {
+  echo "Error: " . $relation . "<br>" . $conn->error;
 }
 
 $conn->close();
