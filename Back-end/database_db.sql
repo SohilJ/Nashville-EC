@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 05, 2020 at 12:27 AM
+-- Generation Time: Aug 13, 2020 at 04:37 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -48,6 +48,54 @@ INSERT INTO `demographics` (`d_id`, `demographic`, `created`) VALUES
 (8, 'White', '2020-07-29 23:35:16'),
 (9, 'Other', '2020-07-29 23:35:16'),
 (10, 'Rather not say', '2020-07-29 23:35:16');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `genders`
+--
+
+CREATE TABLE `genders` (
+  `g_id` int(7) NOT NULL,
+  `gender` varchar(54) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `genders`
+--
+
+INSERT INTO `genders` (`g_id`, `gender`) VALUES
+(1, 'female'),
+(2, 'male'),
+(3, 'other'),
+(4, 'rather not say'),
+(5, 'non binary');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `industries`
+--
+
+CREATE TABLE `industries` (
+  `i_id` int(7) NOT NULL,
+  `indsutry` varchar(60) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `industries`
+--
+
+INSERT INTO `industries` (`i_id`, `indsutry`) VALUES
+(1, 'arts'),
+(2, 'biomedical'),
+(3, 'consumer goods'),
+(4, 'financial services'),
+(5, 'food and beverage'),
+(6, 'healthcare'),
+(7, 'music and entertainment'),
+(8, 'technology'),
+(9, 'other');
 
 -- --------------------------------------------------------
 
@@ -100,6 +148,33 @@ INSERT INTO `stage` (`b_id`, `stage`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `types`
+--
+
+CREATE TABLE `types` (
+  `t_id` int(7) NOT NULL,
+  `type` varchar(54) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `types`
+--
+
+INSERT INTO `types` (`t_id`, `type`) VALUES
+(1, 'for profit'),
+(2, 'brick and mortar'),
+(3, 'small business'),
+(4, 'product'),
+(5, 'nonprofit'),
+(6, 'social enterprise'),
+(7, 'service'),
+(8, 'scalable organization'),
+(9, 'technology'),
+(10, 'student business');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -139,6 +214,158 @@ INSERT INTO `users` (`id`, `name`, `email`, `website`, `description`, `created`)
 (20, 'The Wondr\'y', 'default@gmail.com', 'https://www.vanderbilt.edu/thewondry/', 'The Wond’ry is the epicenter for creativity, innovation, and entrepreneurship on Vanderbilt\'s campus. Students and faculty are encouraged to build, innovate, explore and care. The Wond’ry is the primary point of connection for students interested in innov', '2020-08-04 15:27:45'),
 (21, 'TSBDC', 'gjones7@tnstate.edu', 'https://www.tsbdc.org/tsu/', 'We are here to help entrepreneurs help themselves. The Tennessee Small Business Development Center provides a myriad of services for entrepreneurs to take advantage of like free confidential counseling as well as training seminars, both public and private', '2020-08-04 15:30:05'),
 (22, '\r\nCorner to Corner', 'shana@cornertocorner.org ', 'https://cornertocorner.org/', 'We believe Nashville should be a place where all neighbors flourish. We are compelled by the love of Christ to love our neighbors as ourselves. We seek creative ways to meet the needs of our community, believing Nashville can be a place where all neighbor', '2020-08-04 15:30:05');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users_industries`
+--
+
+CREATE TABLE `users_industries` (
+  `user_id_FK` int(7) NOT NULL,
+  `i_id_FK` int(7) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `users_industries`
+--
+
+INSERT INTO `users_industries` (`user_id_FK`, `i_id_FK`) VALUES
+(1, 5),
+(2, 1),
+(2, 3),
+(2, 4),
+(2, 5),
+(2, 6),
+(2, 7),
+(2, 8),
+(2, 9),
+(3, 1),
+(3, 3),
+(3, 4),
+(3, 5),
+(3, 6),
+(3, 7),
+(3, 8),
+(3, 9),
+(4, 1),
+(4, 3),
+(4, 4),
+(4, 5),
+(4, 6),
+(4, 7),
+(4, 8),
+(4, 9),
+(6, 1),
+(6, 3),
+(6, 4),
+(6, 5),
+(6, 6),
+(6, 7),
+(6, 8),
+(6, 9),
+(12, 1),
+(12, 3),
+(12, 4),
+(12, 5),
+(12, 6),
+(12, 7),
+(12, 8),
+(12, 9),
+(13, 1),
+(13, 3),
+(13, 4),
+(13, 5),
+(13, 6),
+(13, 7),
+(13, 8),
+(13, 9),
+(14, 3),
+(14, 4),
+(14, 5),
+(14, 6),
+(14, 7),
+(14, 8),
+(14, 9),
+(15, 1),
+(15, 3),
+(15, 4),
+(15, 5),
+(15, 6),
+(15, 7),
+(15, 8),
+(15, 9),
+(16, 1),
+(16, 3),
+(16, 4),
+(16, 5),
+(16, 6),
+(16, 7),
+(16, 8),
+(16, 9),
+(17, 1),
+(17, 3),
+(17, 4),
+(17, 5),
+(17, 6),
+(17, 7),
+(17, 8),
+(17, 9),
+(18, 1),
+(18, 3),
+(18, 4),
+(18, 5),
+(18, 6),
+(18, 7),
+(18, 8),
+(18, 9),
+(19, 1),
+(19, 3),
+(19, 4),
+(19, 5),
+(19, 6),
+(19, 7),
+(19, 8),
+(19, 9),
+(20, 1),
+(20, 3),
+(20, 4),
+(20, 5),
+(20, 6),
+(20, 7),
+(20, 8),
+(20, 9),
+(21, 1),
+(21, 3),
+(21, 4),
+(21, 5),
+(21, 6),
+(21, 7),
+(21, 8),
+(21, 9),
+(22, 1),
+(22, 3),
+(22, 4),
+(22, 5),
+(22, 6),
+(22, 7),
+(22, 8),
+(22, 9),
+(5, 7),
+(7, 8),
+(10, 1),
+(11, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users_types`
+--
+
+CREATE TABLE `users_types` (
+  `user_id_FK` int(7) NOT NULL,
+  `t_id_FK` int(7) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -366,6 +593,111 @@ INSERT INTO `user_demographics` (`id`, `user_id_FK`, `d_id_FK`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `user_genders`
+--
+
+CREATE TABLE `user_genders` (
+  `user_id_FK` int(7) NOT NULL,
+  `g_id_FK` int(7) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user_genders`
+--
+
+INSERT INTO `user_genders` (`user_id_FK`, `g_id_FK`) VALUES
+(1, 1),
+(1, 2),
+(1, 3),
+(1, 4),
+(2, 1),
+(2, 2),
+(2, 3),
+(2, 4),
+(3, 1),
+(3, 2),
+(3, 3),
+(3, 4),
+(4, 1),
+(4, 2),
+(4, 3),
+(4, 4),
+(5, 1),
+(5, 2),
+(5, 3),
+(5, 4),
+(6, 1),
+(6, 2),
+(6, 3),
+(6, 4),
+(7, 1),
+(7, 2),
+(7, 3),
+(7, 4),
+(8, 1),
+(8, 2),
+(8, 3),
+(8, 4),
+(9, 1),
+(9, 2),
+(9, 3),
+(9, 4),
+(10, 1),
+(10, 2),
+(10, 3),
+(10, 4),
+(11, 1),
+(11, 2),
+(11, 3),
+(11, 4),
+(12, 1),
+(12, 2),
+(12, 3),
+(12, 4),
+(13, 1),
+(13, 2),
+(13, 3),
+(13, 4),
+(14, 1),
+(14, 2),
+(14, 3),
+(14, 4),
+(15, 1),
+(15, 2),
+(15, 3),
+(15, 4),
+(16, 1),
+(16, 2),
+(16, 3),
+(16, 4),
+(17, 1),
+(17, 2),
+(17, 3),
+(17, 4),
+(18, 1),
+(18, 2),
+(18, 3),
+(18, 4),
+(19, 1),
+(19, 2),
+(19, 3),
+(19, 4),
+(20, 1),
+(20, 2),
+(20, 3),
+(20, 4),
+(21, 1),
+(21, 2),
+(21, 3),
+(21, 4),
+(22, 1),
+(22, 2),
+(22, 3),
+(22, 4);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user_navigations`
 --
 
@@ -580,6 +912,18 @@ ALTER TABLE `demographics`
   ADD PRIMARY KEY (`d_id`);
 
 --
+-- Indexes for table `genders`
+--
+ALTER TABLE `genders`
+  ADD PRIMARY KEY (`g_id`);
+
+--
+-- Indexes for table `industries`
+--
+ALTER TABLE `industries`
+  ADD PRIMARY KEY (`i_id`);
+
+--
 -- Indexes for table `navigations`
 --
 ALTER TABLE `navigations`
@@ -592,10 +936,30 @@ ALTER TABLE `stage`
   ADD PRIMARY KEY (`b_id`);
 
 --
+-- Indexes for table `types`
+--
+ALTER TABLE `types`
+  ADD PRIMARY KEY (`t_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users_industries`
+--
+ALTER TABLE `users_industries`
+  ADD KEY `user_id_FK` (`user_id_FK`),
+  ADD KEY `i_id_FK` (`i_id_FK`);
+
+--
+-- Indexes for table `users_types`
+--
+ALTER TABLE `users_types`
+  ADD KEY `user_id_FK` (`user_id_FK`),
+  ADD KEY `t_id_FK` (`t_id_FK`);
 
 --
 -- Indexes for table `user_demographics`
@@ -604,6 +968,13 @@ ALTER TABLE `user_demographics`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id_FK` (`user_id_FK`) USING BTREE,
   ADD KEY `d_id_FK` (`d_id_FK`) USING BTREE;
+
+--
+-- Indexes for table `user_genders`
+--
+ALTER TABLE `user_genders`
+  ADD KEY `user_id_FK` (`user_id_FK`),
+  ADD KEY `g_id_FK` (`g_id_FK`);
 
 --
 -- Indexes for table `user_navigations`
@@ -624,11 +995,32 @@ ALTER TABLE `user_stages`
 --
 
 --
+-- Constraints for table `users_industries`
+--
+ALTER TABLE `users_industries`
+  ADD CONSTRAINT `users_industries_ibfk_1` FOREIGN KEY (`user_id_FK`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `users_industries_ibfk_2` FOREIGN KEY (`i_id_FK`) REFERENCES `industries` (`i_id`);
+
+--
+-- Constraints for table `users_types`
+--
+ALTER TABLE `users_types`
+  ADD CONSTRAINT `users_types_ibfk_1` FOREIGN KEY (`user_id_FK`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `users_types_ibfk_2` FOREIGN KEY (`t_id_FK`) REFERENCES `types` (`t_id`);
+
+--
 -- Constraints for table `user_demographics`
 --
 ALTER TABLE `user_demographics`
   ADD CONSTRAINT `user_demographics_ibfk_1` FOREIGN KEY (`user_id_FK`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `user_demographics_ibfk_2` FOREIGN KEY (`d_id_FK`) REFERENCES `demographics` (`d_id`);
+
+--
+-- Constraints for table `user_genders`
+--
+ALTER TABLE `user_genders`
+  ADD CONSTRAINT `user_genders_ibfk_1` FOREIGN KEY (`user_id_FK`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `user_genders_ibfk_2` FOREIGN KEY (`g_id_FK`) REFERENCES `genders` (`g_id`);
 
 --
 -- Constraints for table `user_navigations`
