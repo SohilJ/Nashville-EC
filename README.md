@@ -8,3 +8,9 @@ We built the web pages based on the design that we received from Nashville- EC t
 
 # What's next for this project
 Nashville EC can use this website as their main website by adding the remaining feilds and completing populating the databse with all the resources.
+
+# More info
+More information on how it works can be found in the below youtube links. If you still don't find what you are looking for, please feel free to contact Lepakshi Agarwal @ agarwallepakshi@gmail.com or Sohil Jain @
+
+Youtube phase 1 - 
+Youtube pahse 2 - 
