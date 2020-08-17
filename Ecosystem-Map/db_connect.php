@@ -1,10 +1,10 @@
 <?php
 
-$dbhost = 'localhost';
+$dbhost   = 'localhost';
 $username = 'root';
 $password = '';
-$db = 'database_db';
-$con = mysqli_connect("$dbhost", "$username", "$password");
+$db       = 'database_db';
+$con      = mysqli_connect("$dbhost", "$username", "$password");
 
 mysqli_connect("$dbhost", "$username", "$password");
 
@@ -65,50 +65,53 @@ mysqli_select_db($con, $db);
     </nav>
     
 <?php
-    //$query = $_GET['query']; 
-    $query = 'Asian';
-    // gets value sent over search form
-     
-    //$min_length = 3;
-    // you can set minimum length of the query if you want
-     
-    //if(strlen($query) >= $min_length){ // if query length is more or equal minimum length then
-         
-        $query = htmlspecialchars($query); 
-        // changes characters used in html to their equivalents, for example: < to &gt;
-         
-        $query = mysqli_real_escape_string($con, $query);
-        // makes sure nobody uses SQL injection
-         
-        $raw_results = mysqli_query($con, "SELECT users.name FROM users, user_demographics, demographics WHERE demographics.demographic LIKE '%".$query."%' AND user_demographics.d_id_FK= demographics.d_id AND users.id= user_demographics.user_id_FK") or die(mysqli_error($con));
-             
-        // * means that it selects all fields, you can also write: `id`, `title`, `text`
-        // articles is the name of our table
-         
-        // '%$query%' is what we're looking for, % means anything, for example if $query is Hello
-        // it will match "hello", "Hello man", "gogohello", if you want exact match use `title`='$query'
-        // or if you want to match just full word so "gogohello" is out use '% $query %' ...OR ... '$query %' ... OR ... '% $query'
-         
-        if(mysqli_num_rows($raw_results) > 0){ // if one or more rows are returned do following
-             
-            while($results = mysqli_fetch_array($raw_results)){
-            //$results = mysql_fetch_array($raw_results) puts data from database into array, while it's valid it does the loop
-             
-                echo "<p><h3>".$results['name']."</p>";
-                // posts results gotten from database(title and text) you can also show id ($results['id'])
-            }
+$query = $_GET['query'];
+//$query = 'Asian';
+// gets value sent over search form
 
-            //"</h3>".$results['id'].
-             
-        }
-        else{ // if there is no matching rows do following
-            echo "No results";
-        }
-         
-    //}
-    //else{ // if query length is less than minimum
-        //echo "Minimum length is ".$min_length;
-    //}
+//$min_length = 3;
+// you can set minimum length of the query if you want
+
+//if(strlen($query) >= $min_length){ // if query length is more or equal minimum length then
+
+$query = htmlspecialchars($query);
+// changes characters used in html to their equivalents, for example: < to &gt;
+
+$query = mysqli_real_escape_string($con, $query);
+// makes sure nobody uses SQL injection
+
+$raw_results = mysqli_query($con, "SELECT users.name FROM users, user_demographics, demographics WHERE demographics.demographic LIKE '%" . $query . "%' AND user_demographics.d_id_FK= demographics.d_id AND users.id= user_demographics.user_id_FK") or die(mysqli_error($con));
+
+/*
+
+//This query return name of the organizations with demographic tag asian but asian could be replaced with any variable
+$sql = "SELECT users.name FROM users, user_demographics, demographics WHERE demographics.demographic=\'Asian\' AND user_demographics.d_id_FK= demographics.d_id AND users.id= user_demographics.user_id_FK";
+
+//bussiness stage query
+$sql = "SELECT users.name FROM users, stage, user_stages WHERE stage.stage = \"just an idea\" AND user_stages.user_id_FK = users.id AND user_stages.b_id_FK = stage.b_id";
+
+//navigation multi query
+//you can add as many variables by saying or in between them
+//it would be better if we could run this in a for loop
+
+$sql = "SELECT name FROM users, user_navigations, navigations WHERE navigations.navigation= \"funding\" OR navigations.navigation = \"mentorship\" AND user_navigations.user_id_FK = users.id AND user_navigations.n_id_FK = navigations.n_id";
+
+*/
+
+if (mysqli_num_rows($raw_results) > 0) { // if one or more rows are returned do following
+    
+    while ($results = mysqli_fetch_array($raw_results)) {
+        //$results = mysql_fetch_array($raw_results) puts data from database into array, while it's valid it does the loop
+        
+        echo "<p><h3>" . $results['name'] . "</p>";
+        // posts results gotten from database(title and text) you can also show id ($results['id'])
+    }
+    
+    
+} else { // if there is no matching rows do following
+    echo "No results";
+}
+
 ?>
 
 </body>
